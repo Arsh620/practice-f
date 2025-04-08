@@ -26,27 +26,28 @@ const Login = () => {
         setRememberMe(e.target.checked);
     };
 
-    // Handle form submission
     const handleLogin = async (e) => {
         e.preventDefault();
         setLoading(true);
-
+    
         try {
             const response = await api.login(credentials);
             console.log("API Response:", response);
-
+    
             if (response.status) {
                 toast.success("✅ Login successful!");
+    
+                // Correct way to store user ID and token
+                localStorage.setItem("user", JSON.stringify(response.user));
 
-                localStorage.setItem("token", response.metaData.token);
-                localStorage.setItem("user", response.metaData.user);
-
+    
+                // Remember email if checkbox is ticked
                 if (rememberMe) {
                     localStorage.setItem("rememberedEmail", credentials.email);
                 } else {
                     localStorage.removeItem("rememberedEmail");
                 }
-
+    
                 navigate("/dashboard");
             } else {
                 toast.error(`❌ Error: ${response.message}`);
@@ -57,13 +58,14 @@ const Login = () => {
             setLoading(false);
         }
     };
+    
 
     return (
-        <section className="bg-gray-50 dark:bg-gray-900 min-h-screen flex items-center justify-center">
+        <section  className="min-h-screen flex items-center justify-center bg-gray-200">
             <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto mt-[-30px] sm:mt-[-50px]">
-                <div className="w-full bg-white border border-gray-300 rounded-lg shadow-lg sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
+            <div className="bg-white p-6 rounded-xl shadow-md w-full max-w-md">
                     <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
-                        <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
+                    <h1 className="text-2xl font-bold text-center mb-4">
                             Sign in to your account
                         </h1>
 

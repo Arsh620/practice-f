@@ -24,7 +24,7 @@ const Register = () => {
 
     try {
       const response = await api.register(formData); // Call API function
-      if (response.success) {
+      if (response.message) {
         setMessage("Registration successful! 🎉");
         setFormData({ name: "", email: "", password: "" }); // Reset form
       } else {

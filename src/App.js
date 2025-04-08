@@ -7,18 +7,8 @@ import UserForm from "./components/UserForm";
 import HomeDataForm from "./components/HomeDataForm";
 
 function App() {
-  // const [user, setUser] = useState(localStorage.getItem("user"));
-
   let userData = localStorage.getItem("user");
-  // Sync user state when localStorage changes
-  // useEffect(() => {
-  //   const handleStorageChange = () => {
-  //     setUser(localStorage.getItem("user"));
-  //   };
-
-  //   window.addEventListener("storage", handleStorageChange);
-  //   return () => window.removeEventListener("storage", handleStorageChange);
-  // }, []);
+  console.log("sdvsdvsv:", userData);
 
   return (
     <Router>
